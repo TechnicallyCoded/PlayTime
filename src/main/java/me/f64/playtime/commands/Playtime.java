@@ -8,9 +8,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import me.f64.playtime.Main;
-import me.f64.playtime.utils.ConfigWrapper;
-import me.f64.playtime.utils.TimeFormat;
-import me.f64.playtime.utils.TopPlayers;
+import me.f64.playtime.utils.*;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -21,7 +19,6 @@ import org.bukkit.util.StringUtil;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-import me.f64.playtime.utils.Chat;
 
 public class Playtime implements TabExecutor {
     static Main plugin;
@@ -134,9 +131,9 @@ public class Playtime implements TabExecutor {
 
     public static TopPlayers[] checkOnlinePlayers(TopPlayers[] top10) {
         for (Player player : plugin.getServer().getOnlinePlayers())
-            if (Chat.ticksPlayed(player) > (top10.length == 0 ? 0 : top10[top10.length - 1].time)) {
+            if (Compatibility.ticksPlayed(player) > (top10.length == 0 ? 0 : top10[top10.length - 1].time)) {
                 TopPlayers top = new TopPlayers(player.getName(), player.getUniqueId().toString(),
-                        Chat.ticksPlayed(player));
+                        Compatibility.ticksPlayed(player));
                 for (int i = 0; i < top10.length; ++i)
                     if (top10[i].time <= top.time)
                         if (top10[i].uuid.equals(top.uuid)) {

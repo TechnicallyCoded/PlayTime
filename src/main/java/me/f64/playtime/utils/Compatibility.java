@@ -2,6 +2,9 @@ package me.f64.playtime.utils;
 
 import com.google.common.primitives.Ints;
 import org.bukkit.Bukkit;
+import org.bukkit.Statistic;
+import org.bukkit.entity.Player;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -46,5 +49,12 @@ public final class Compatibility {
         if (version == null)
             throw new GuiException("Could not retrieve server version!");
         return version;
+    }
+
+    public static int ticksPlayed(Player player) {
+        if (IS_LEGACY) {
+            return player.getStatistic(Statistic.valueOf("PLAY_ONE_TICK")) / 20;
+        }
+        return player.getStatistic(Statistic.valueOf("PLAY_ONE_MINUTE")) / 20;
     }
 }

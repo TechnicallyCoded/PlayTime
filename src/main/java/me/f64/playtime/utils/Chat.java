@@ -29,11 +29,4 @@ public class Chat {
         Bukkit.getConsoleSender().sendMessage(format(commandLabel));
         return commandLabel;
     }
-
-    public static int ticksPlayed(Player player) {
-        if (!Compatibility.IS_LEGACY) {
-            return player.getStatistic(Statistic.valueOf("PLAY_ONE_MINUTE")) / 20;
-        }
-        return player.getStatistic(Statistic.valueOf("PLAY_ONE_TICK")) / 20;
-    }
 }

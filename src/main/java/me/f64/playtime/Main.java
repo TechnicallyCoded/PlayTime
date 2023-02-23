@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import me.f64.playtime.utils.Compatibility;
 import org.bukkit.Bukkit;
 import org.bukkit.Statistic;
 import org.bukkit.entity.Player;
@@ -76,9 +77,9 @@ public class Main extends JavaPlugin implements Listener {
         if (!(player.hasPlayedBefore())) {
             target.put("uuid", player.getUniqueId().toString());
             target.put("lastName", player.getName());
-            target.put("time", Chat.ticksPlayed(player) + 1);
+            target.put("time", Compatibility.ticksPlayed(player) + 1);
             target.put("joins", player.getStatistic(Statistic.LEAVE_GAME) + 1);
-            target.put("session", Chat.ticksPlayed(player));
+            target.put("session", Compatibility.ticksPlayed(player));
             Bukkit.getScheduler().runTaskAsynchronously(this, () -> writePlayer(target));
         }
     }
@@ -93,7 +94,7 @@ public class Main extends JavaPlugin implements Listener {
                 if (player.get("lastName").equals(name)) {
                     final Player p = Main.plugin.getServer().getPlayer(name);
                     final int session = Integer.parseInt(player.get("session").toString());
-                    final int current = Chat.ticksPlayed(p);
+                    final int current = Compatibility.ticksPlayed(p);
                     return current - session;
                 }
             }
@@ -141,9 +142,9 @@ public class Main extends JavaPlugin implements Listener {
         JSONObject target = new JSONObject();
         target.put("uuid", player.getUniqueId().toString());
         target.put("lastName", player.getName());
-        target.put("time", Chat.ticksPlayed(player));
+        target.put("time", Compatibility.ticksPlayed(player));
         target.put("joins", player.getStatistic(Statistic.LEAVE_GAME) + 1);
-        target.put("session", Chat.ticksPlayed(player));
+        target.put("session", Compatibility.ticksPlayed(player));
         if (!Bukkit.getPluginManager().isPluginEnabled(this))
             writePlayer(target);
         else
