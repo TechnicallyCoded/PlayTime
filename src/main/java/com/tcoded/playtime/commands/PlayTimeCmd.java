@@ -31,7 +31,7 @@ public class PlayTimeCmd implements TabExecutor {
             FileConfiguration config = this.plugin.getConfig();
 
         ChatUtil chatUtil = this.plugin.getChatUtil();
-        if (!sender.hasPermission("playtime.check")) {
+        if (!sender.hasPermission("playtime.command.playtime")) {
                 chatUtil.message(sender, config.getString(ConfigKeys.MESSAGES_NO_PERMISSION));
                 return true;
             }
