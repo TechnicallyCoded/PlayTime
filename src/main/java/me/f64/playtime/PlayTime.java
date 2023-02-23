@@ -25,7 +25,7 @@ import me.f64.playtime.placeholderapi.Expansion;
 import me.f64.playtime.utils.Chat;
 import me.f64.playtime.utils.UpdateChecker;
 
-public class Main extends JavaPlugin implements Listener {
+public class PlayTime extends JavaPlugin implements Listener {
     public static Plugin plugin;
     public String storagePath = getDataFolder() + "/userdata.json";
 
@@ -92,7 +92,7 @@ public class Main extends JavaPlugin implements Listener {
             for (final Object o : players) {
                 final JSONObject player = (JSONObject) o;
                 if (player.get("lastName").equals(name)) {
-                    final Player p = Main.plugin.getServer().getPlayer(name);
+                    final Player p = PlayTime.plugin.getServer().getPlayer(name);
                     final int session = Integer.parseInt(player.get("session").toString());
                     final int current = Compatibility.ticksPlayed(p);
                     return current - session;

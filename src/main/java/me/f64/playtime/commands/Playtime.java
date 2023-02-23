@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import me.f64.playtime.Main;
+import me.f64.playtime.PlayTime;
 import me.f64.playtime.utils.*;
 
 import org.bukkit.command.Command;
@@ -21,10 +21,10 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
 public class Playtime implements TabExecutor {
-    static Main plugin;
+    static PlayTime plugin;
     public static ConfigWrapper config;
 
-    public Playtime(Main instance) {
+    public Playtime(PlayTime instance) {
         plugin = instance;
         Playtime.config = new ConfigWrapper(instance, null, "config.yml");
         Playtime.config.createFile(null,

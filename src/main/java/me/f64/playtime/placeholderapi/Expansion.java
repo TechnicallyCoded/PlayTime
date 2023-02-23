@@ -7,7 +7,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import me.f64.playtime.commands.Playtime;
-import me.f64.playtime.Main;
+import me.f64.playtime.PlayTime;
 import me.f64.playtime.utils.Compatibility;
 import me.f64.playtime.utils.TimeFormat;
 import me.f64.playtime.utils.TopPlayers;
@@ -22,11 +22,11 @@ import me.f64.playtime.utils.Chat;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 
 public class Expansion extends PlaceholderExpansion {
-    static Main plugin;
+    static PlayTime plugin;
     static Pattern topPlaceholder = Pattern.compile("top_([0-9]+)_(name|time)");
     Pattern positionPlaceholder = Pattern.compile("position_([_A-Za-z0-9]+)");
 
-    public Expansion(Main instance) {
+    public Expansion(PlayTime instance) {
         plugin = instance;
     }
 
