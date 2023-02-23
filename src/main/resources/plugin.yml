@@ -1,12 +1,11 @@
 name: PlayTime
-author: F64_Rx
+author: TechnicallyCoded
+authors: [ TechnicallyCoded ]
 version: ${project.version}
-description: allows player to see how much they have played for.
-main: me.f64.playtime.Main
-depend: [PlaceholderAPI]
+description: Track player playtime statistics
+main: com.tcoded.PlayTime
+depend: [ PlaceholderAPI ]
 
 commands:
   playtime:
-    usage: /<command>
-    aliases: [timeplayed, pt]
-    description: Main command for Playtime!
+    description: Primary command

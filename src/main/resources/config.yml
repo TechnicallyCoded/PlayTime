@@ -1,0 +1,63 @@
+
+# ================= CONFIGURATION =================
+# Placeholders:
+#   %prefix% - plugin prefix
+#   %playtime_playername% - the name of player
+#   %playtime_playtime% - the time spent on this server
+#   %playtime_offlinetime% - how much time was this player offline for
+#   %playtime_timesjoined% - how many times the player has joined the server
+#   %playtime_serveruptime% - the time the server has been online for
+#   -- UNSUPPORTED --
+#   %playtime_position% - current position on the leaderboard
+#   %playtime_top_playername_#% - name of the player at leaderboard position #
+#   %playtime_top_playtime_#% - time played of the player at leaderboard position #
+#
+# Supports all other PAPI placeholders
+
+plugin-prefix: "&8[&bPlayTime&8]"
+
+time:
+  second:
+    enabled: true
+    prefix: "s"
+  minute:
+    enabled: true
+    prefix: "m"
+  hour:
+    enabled: true
+    prefix: "h"
+  day:
+    enabled: true
+    prefix: "d"
+  week:
+    enabled: true
+    prefix: "w"
+
+messages:
+  no_permission: "%prefix% &cYou don't have permission."
+  doesnt_exist: "%prefix% &cPlayer %playtime_playername% has not joined before!"
+  player:
+    - "&b%playtime_playername%'s Stats are:"
+    - "&bPlayTime: &7%playtime_playtime%"
+    - "&bOnline: &7%playtime_lastjoin%"
+    - "&bTimes Joined: &7%playtime_timesjoined%"
+  offline_players:
+    - "&b%playtime_playername%'s Stats are:"
+    - "&bPlayTime: &7%playtime_offlinetime%"
+    - "&bOffline: &7%playtime_lastquit%"
+    - "&bTimes Joined: &7%offlinetimesjoined%"
+  other_players:
+    - "&b%playtime_playername%'s Stats are:"
+    - "&bPlayTime: &7%playtime_playtime%"
+    - "&bOnline: &7%playtime_lastjoin%"
+    - "&bTimes Joined: &7%playtime_timesjoined%"
+  playtimetop:
+    header: "&bTop &e10 &bplayers playtime:"
+    message: "&a%position%. &b%player%: &e%playtime%"
+    footer: ""
+  server_uptime: "%prefix% &bServer's total uptime is %playtime_serveruptime%"
+  reload_config: "%prefix% &bYou have successfully reloaded the config."
+  placeholder:
+    top:
+      name: "none"
+      time: "-"

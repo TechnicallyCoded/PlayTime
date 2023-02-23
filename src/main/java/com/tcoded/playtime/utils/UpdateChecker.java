@@ -1,4 +1,4 @@
-package me.f64.playtime.utils;
+package com.tcoded.playtime.utils;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -6,16 +6,17 @@ import java.net.URL;
 import java.util.Scanner;
 import java.util.function.Consumer;
 
-import me.f64.playtime.PlayTime;
+import com.tcoded.playtime.PlayTime;
 import org.bukkit.Bukkit;
 
 public class UpdateChecker {
-    static PlayTime plugin;
-    public static int resourceId;
 
-    public UpdateChecker(PlayTime instance, int resourceId) {
-        plugin = instance;
-        UpdateChecker.resourceId = resourceId;
+    private PlayTime plugin;
+    private int resourceId;
+
+    public UpdateChecker(PlayTime plugin, int resourceId) {
+        this.plugin = plugin;
+        this.resourceId = resourceId;
     }
 
     public void getVersion(final Consumer<String> consumer) {
