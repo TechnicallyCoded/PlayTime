@@ -112,17 +112,17 @@ public class Expansion extends PlaceholderExpansion {
         if (commandLabel.equals("time_hours")) {
             long sec = Duration.of(Compatibility.ticksPlayed(player), ChronoUnit.SECONDS).getSeconds();
             long min = sec / 60, hour = min / 60;
-            return String.valueOf(new Long(hour).intValue());
+            return String.valueOf(Long.valueOf(hour).intValue());
         }
         if (commandLabel.equals("time_days")) {
             long sec = Duration.of(Compatibility.ticksPlayed(player), ChronoUnit.SECONDS).getSeconds();
             long min = sec / 60, hour = min / 60, day = hour / 24;
-            return String.valueOf(new Long(day).intValue());
+            return String.valueOf(Long.valueOf(day).intValue());
         }
         if (commandLabel.equals("time_weeks")) {
             long sec = Duration.of(Compatibility.ticksPlayed(player), ChronoUnit.SECONDS).getSeconds();
             long min = sec / 60, hour = min / 60, day = hour / 24, week = day / 7;
-            return String.valueOf(new Long(week).intValue());
+            return String.valueOf(Long.valueOf(week).intValue());
         }
         if (commandLabel.equals("session")) {
             return String.valueOf(TimeFormat.getTime(Duration.of(Expansion.plugin.getPlayerSession(player.getName()), ChronoUnit.SECONDS)));
