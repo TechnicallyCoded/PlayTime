@@ -10,6 +10,7 @@ public class ConfigKeys {
     public static final String MESSAGES_SERVER_UPTIME = "messages.server_uptime";
     public static final String MESSAGES_DOESNT_EXIST = "messages.doesnt_exist";
     public static final String MESSAGES_OTHER_PLAYER_INFO = "messages.other_players";
+    public static final String MESSAGES_OFFLINE_PLAYER_INFO = "messages.offline_players";
     public static final String MESSAGES_INTERNAL_ERROR = "messages.internal-error";
 
     // Time

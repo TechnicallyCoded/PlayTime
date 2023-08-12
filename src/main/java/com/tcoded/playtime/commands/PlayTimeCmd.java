@@ -75,9 +75,12 @@ public class PlayTimeCmd implements TabExecutor {
 
                         future.thenAccept(offlinePlayerData -> {
                             if (offlinePlayerData.isPresent()) {
-                                this.sendOtherPlayerStats(sender, offlineTarget, offlinePlayerData.get());
+                                this.sendOtherOfflinePlayerStats(sender, offlineTarget, offlinePlayerData.get());
                             } else {
-                                chatUtil.message(sender, config.getString(ConfigKeys.MESSAGES_DOESNT_EXIST));
+                                chatUtil.message(sender, offlineTarget,
+                                        config.getString(ConfigKeys.MESSAGES_DOESNT_EXIST)
+                                            .replace("%playtime_playername%", arg0)
+                                );
                             }
                         });
                     }
@@ -100,6 +103,14 @@ public class PlayTimeCmd implements TabExecutor {
         }
     }
 
+    private void sendOtherOfflinePlayerStats(CommandSender sender, OfflinePlayer target, PlayerPlayTimeData data) {
+        FileConfiguration config = this.plugin.getConfig();
+
+        for (String messagePart : config.getStringList(ConfigKeys.MESSAGES_OFFLINE_PLAYER_INFO)) {
+            this.plugin.getChatUtil().message(sender, target, messagePart);
+        }
+    }
+
     private boolean checkPermission(CommandSender sender, String permission) {
         if (sender.hasPermission(permission)) return true;
 
@@ -115,15 +126,16 @@ public class PlayTimeCmd implements TabExecutor {
 
         String lowerArg0 = args[0].toLowerCase();
         for (String option : options) {
-            if (lowerArg0.startsWith(option.toLowerCase())) tabComplete.add(option);
+            if (option.toLowerCase().startsWith(lowerArg0)) tabComplete.add(option);
         }
+
+        if (tabComplete.size() > 0) tabComplete.add(" ");
 
         for (Player p : plugin.getServer().getOnlinePlayers()) {
             String pName = p.getName();
-            if (lowerArg0.startsWith(pName.toLowerCase())) tabComplete.add(pName);
+            if (pName.toLowerCase().startsWith(lowerArg0)) tabComplete.add(pName);
         }
 
-
-        return null;
+        return tabComplete;
     }
 }

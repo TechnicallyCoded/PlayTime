@@ -6,6 +6,7 @@ import com.tcoded.playtime.placeholderapi.PlayTimeExpansion;
 import com.tcoded.playtime.utils.TimeFormat;
 import com.tcoded.playtime.listener.Listeners;
 import org.bukkit.Bukkit;
+import org.bukkit.command.PluginCommand;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -35,7 +36,10 @@ public class PlayTime extends JavaPlugin implements Listener {
         this.playerDataManager.loadAll();
 
         // Commands
-        getCommand("playtime").setExecutor(new PlayTimeCmd(this));
+        PlayTimeCmd playtimeCmd = new PlayTimeCmd(this);
+        PluginCommand playtimePlCmd = getCommand("playtime");
+        playtimePlCmd.setExecutor(playtimeCmd);
+        playtimePlCmd.setTabCompleter(playtimeCmd);
 
         // Listeners
         this.getServer().getPluginManager().registerEvents(new Listeners(this), this);

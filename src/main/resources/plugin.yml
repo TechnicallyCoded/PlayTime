@@ -3,7 +3,7 @@ author: TechnicallyCoded
 authors: [ TechnicallyCoded ]
 version: ${project.version}
 description: Track player playtime statistics
-main: com.tcoded.PlayTime
+main: com.tcoded.playtime.PlayTime
 depend: [ PlaceholderAPI ]
 
 commands:

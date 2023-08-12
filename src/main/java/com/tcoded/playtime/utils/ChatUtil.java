@@ -18,17 +18,17 @@ public class ChatUtil {
     }
 
     public void message(CommandSender sender, Player player, String message) {
-        sender.sendMessage(format(player, message));
+        sender.sendMessage(colorize(format(player, message)));
     }
 
     public void message(CommandSender sender, OfflinePlayer offlinePlayer, String message) {
         if (offlinePlayer instanceof Player) message(sender, (Player) offlinePlayer, message);
-        else sender.sendMessage(format(offlinePlayer, message));
+        else sender.sendMessage(colorize(format(offlinePlayer, message)));
     }
 
     public void message(CommandSender sender, String message) {
         if (sender instanceof Player) message(sender, (Player) sender, message);
-        else sender.sendMessage(colorize(message));
+        else sender.sendMessage(colorize(localPlaceholders(message)));
     }
 
     public void console(String message) {
