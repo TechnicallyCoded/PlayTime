@@ -51,7 +51,7 @@ public class TimeFormat {
             seconds -= weeksDuration.getSeconds();
             minutes -= weeksDuration.toMinutes();
             hours -= weeksDuration.toHours();
-            days -= weeksDuration.toHours();
+            days -= weeksDuration.toDays();
 
             if (weeks > 0) {
                 strb.append(weeks);
