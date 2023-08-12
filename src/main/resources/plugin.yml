@@ -10,3 +10,4 @@ commands:
   playtime:
     description: Primary command
     permission: playtime.command.playtime
+    aliases: [ pt ]
