@@ -6,7 +6,7 @@
 
     <groupId>com.tcoded</groupId>
     <artifactId>PlayTime</artifactId>
-    <version>4.0.2</version>
+    <version>4.0.3</version>
     <name>PlayTime</name>
     <packaging>jar</packaging>
 

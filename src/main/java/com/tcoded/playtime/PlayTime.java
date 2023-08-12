@@ -20,6 +20,7 @@ public class PlayTime extends JavaPlugin implements Listener {
     private PlayerDataManager playerDataManager;
     private ChatUtil chatUtil;
     private TimeFormat formatTimeUtil;
+    private PlayTimeExpansion playTimeExpansion = null;
 
 
     @Override
@@ -67,7 +68,8 @@ public class PlayTime extends JavaPlugin implements Listener {
     private void placeholderAPI() {
         if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
             getChatUtil().console("%prefix% &bPlaceholderAPI &awas found&7! Registering Placeholders.");
-            new PlayTimeExpansion(this).register();
+            playTimeExpansion = new PlayTimeExpansion(this);
+            playTimeExpansion.register();
             Bukkit.getPluginManager().registerEvents(this, this);
         } else {
             getChatUtil().console("%prefix% &bPlaceholderAPI &cwas not found&7! Disabling Plugin.");
@@ -78,6 +80,7 @@ public class PlayTime extends JavaPlugin implements Listener {
     @Override
     public void onDisable() {
         getServer().getOnlinePlayers().stream().map(Player::getUniqueId).forEach(playerDataManager::saveData);
+        if (playTimeExpansion != null) playTimeExpansion.unregister();
     }
 
     public PlayerDataManager getPlayerDataManager() {
