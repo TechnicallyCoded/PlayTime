@@ -20,6 +20,18 @@ public class TimeFormat {
     }
 
     public String formatTime(Duration duration) {
+        FileConfiguration config = plugin.getConfig();
+
+        boolean secEnabled = config.getBoolean(ConfigKeys.TIME_SECOND_ENABLED, true);
+        boolean minEnabled = config.getBoolean(ConfigKeys.TIME_MINUTE_ENABLED, true);
+        boolean hourEnabled = config.getBoolean(ConfigKeys.TIME_HOUR_ENABLED, true);
+        boolean dayEnabled = config.getBoolean(ConfigKeys.TIME_DAY_ENABLED, true);
+        boolean weekEnabled = config.getBoolean(ConfigKeys.TIME_WEEK_ENABLED, true);
+
+        return this.formatTime(duration, secEnabled, minEnabled, hourEnabled, dayEnabled, weekEnabled);
+    }
+
+    public String formatTime(Duration duration, boolean secEnabled, boolean minEnabled, boolean hourEnabled, boolean dayEnabled, boolean weekEnabled) {
         // Get info from config for what to display
         FileConfiguration config = plugin.getConfig();
         String secSuffix = config.getString(ConfigKeys.TIME_SECOND_SUFFIX, "s");
@@ -27,12 +39,6 @@ public class TimeFormat {
         String hourSuffix = config.getString(ConfigKeys.TIME_HOUR_SUFFIX, "h");
         String daySuffix = config.getString(ConfigKeys.TIME_DAY_SUFFIX, "d");
         String weekSuffix = config.getString(ConfigKeys.TIME_WEEK_SUFFIX, "w");
-
-        boolean secEnabled = config.getBoolean(ConfigKeys.TIME_SECOND_ENABLED, true);
-        boolean minEnabled = config.getBoolean(ConfigKeys.TIME_MINUTE_ENABLED, true);
-        boolean hourEnabled = config.getBoolean(ConfigKeys.TIME_HOUR_ENABLED, true);
-        boolean dayEnabled = config.getBoolean(ConfigKeys.TIME_DAY_ENABLED, true);
-        boolean weekEnabled = config.getBoolean(ConfigKeys.TIME_WEEK_ENABLED, true);
 
         // Start building the final result
         StringBuilder strb = new StringBuilder();

@@ -73,6 +73,9 @@ public class PlayTimeExpansion extends PlaceholderExpansion {
         else if (commandLabel.equals("playtime")) {
             return this.plugin.getTimeFormatUtil().formatTime(durationPlayed);
         }
+        else if (commandLabel.equals("playtime_leaderboard")) {
+            return this.plugin.getTimeFormatUtil().formatTime(durationPlayed, false, false, true, false, false);
+        }
         else if (commandLabel.equals("lastjoin")) {
             return this.plugin.getTimeFormatUtil().formatTime(
                     Duration.ofMillis(System.currentTimeMillis() - playerData.getLastJoinTime()));
