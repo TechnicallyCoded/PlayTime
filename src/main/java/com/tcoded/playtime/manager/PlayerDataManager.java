@@ -83,7 +83,10 @@ public class PlayerDataManager {
         if (rawData == null) return null;
 
         data = PlayerPlayTimeData.deserialize(uuid, rawData);
-        this.dataCacheMap.put(uuid, data);
+
+        if (cache) this.dataCacheMap.put(uuid, data);
+        else if (plugin.getServer().getPlayer(uuid) == null) this.dataLocks.remove(uuid);
+
         return data;
     }
 

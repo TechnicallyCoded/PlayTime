@@ -7,6 +7,7 @@ import java.util.UUID;
 import com.tcoded.playtime.manager.PlayerDataManager;
 import com.tcoded.playtime.PlayTime;
 import com.tcoded.playtime.utils.PlayerPlayTimeData;
+import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
@@ -49,7 +50,7 @@ public class PlayTimeExpansion extends PlaceholderExpansion {
     }
 
     @Override
-    public String onRequest(OfflinePlayer player, String commandLabel) {
+    public String onRequest(OfflinePlayer offlinePlayer, String commandLabel) {
         // General
         if (commandLabel.equals("serveruptime"))
             return String.valueOf(plugin.getTimeFormatUtil().getUptime());
@@ -61,20 +62,24 @@ public class PlayTimeExpansion extends PlaceholderExpansion {
         }
 
         // Per player
-        PlayerPlayTimeData playerData = this.playerDataManager.getCachedData(player.getUniqueId());
+        PlayerPlayTimeData playerData = this.playerDataManager.getCachedData(offlinePlayer.getUniqueId());
         if (playerData == null) {
-            return "player-data-null";
+            if (!offlinePlayer.isOnline() && !Bukkit.isPrimaryThread()) {
+                playerData = this.playerDataManager.getOrLoadData(offlinePlayer.getUniqueId(), false);
+            } else {
+                return "player-data-null";
+            }
         }
 
         Duration durationPlayed = this.getDurationPlayed(playerData);
         if (commandLabel.equals("playername")) {
-            return String.valueOf(player.getName());
+            return String.valueOf(offlinePlayer.getName());
         }
         else if (commandLabel.equals("playtime")) {
             return this.plugin.getTimeFormatUtil().formatTime(durationPlayed);
         }
         else if (commandLabel.equals("playtime_leaderboard")) {
-            return this.plugin.getTimeFormatUtil().formatTime(durationPlayed, false, false, true, false, false);
+            return this.plugin.getTimeFormatUtil().formatTime(durationPlayed, false, false, true, true, false);
         }
         else if (commandLabel.equals("lastjoin")) {
             return this.plugin.getTimeFormatUtil().formatTime(
@@ -85,22 +90,22 @@ public class PlayTimeExpansion extends PlaceholderExpansion {
                     Duration.ofMillis(System.currentTimeMillis() - playerData.getLastQuitTime()));
         }
         else if (commandLabel.equals("playtime_seconds")) {
-            return String.valueOf(durationPlayed.get(ChronoUnit.SECONDS));
+            return String.valueOf(durationPlayed.getSeconds());
         }
         else if (commandLabel.equals("playtime_minutes")) {
-            return String.valueOf(durationPlayed.get(ChronoUnit.MINUTES));
+            return String.valueOf(durationPlayed.getSeconds() / 60);
         }
         else if (commandLabel.equals("playtime_hours")) {
-            return String.valueOf(durationPlayed.get(ChronoUnit.HOURS));
+            return String.valueOf(durationPlayed.getSeconds() / (60 * 60));
         }
         else if (commandLabel.equals("playtime_days")) {
-            return String.valueOf(durationPlayed.get(ChronoUnit.DAYS));
+            return String.valueOf(durationPlayed.getSeconds() /  (60 * 60 * 24));
         }
         else if (commandLabel.equals("playtime_weeks")) {
-            return String.valueOf(durationPlayed.get(ChronoUnit.DAYS) / 7);
+            return String.valueOf(durationPlayed.getSeconds() / (60 * 60 * 24 * 7));
         }
         else if (commandLabel.equals("session")) {
-            PlayerPlayTimeData data = this.playerDataManager.getOrLoadData(player.getUniqueId());
+            PlayerPlayTimeData data = this.playerDataManager.getOrLoadData(offlinePlayer.getUniqueId());
 
             if (data == null) return "internal-error";
 
